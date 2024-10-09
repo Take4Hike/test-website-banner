@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SFC Academy - Test Website</title>
+    <style>
+        /* Reset some default browser styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        /* Body Styling */
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            line-height: 1.6;
+            background-color: #f4f4f4;
+            overflow: hidden;
+        }
+
+        /* Banner Styling for Design 3 */
+        #promo-banner {
+            width: 100%;
+            background-color: #1D2951; /* Solid Blue */
+            color: #fff; /* White Text */
+            padding: 15px 20px;
+            display: flex;
+            justify-content: center; /* Center horizontally */
+            align-items: center; /* Center vertically */
+            position: fixed; /* Fixed below the menu bar */
+            top: 70px; /* Below the menu bar */
+            left: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+
+        .banner-content {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 100%;
+            max-width: 1200px;
+            position: relative;
+        }
+
+        .banner-message {
+            font-size: 16px;
+            text-align: center;
+        }
+
+        .banner-message a {
+            color: #BE1515; /* Red Color for "Learn More" */
+            text-decoration: none;
+            margin-left: 10px;
+            font-weight: bold;
+            padding: 5px 10px;
+            border: 2px solid #BE1515;
+            border-radius: 4px;
+            transition: background-color 0.3s, color 0.3s;
+        }
+
+        .banner-message a:hover {
+            background-color: #BE1515;
+            color: #fff;
+        }
+
+        #dismiss-banner {
+            position: absolute;
+            right: 20px;
+            top: 50%;
+            transform: translateY(-50%);
+            background: none;
+            border: none;
+            font-size: 20px;
+            cursor: pointer;
+            color: #fff;
+            transition: color 0.3s ease;
+        }
+
+        #dismiss-banner:hover {
+            color: #BE1515; /* Red on hover */
+        }
+
+        /* Menu Bar Styling */
+        nav {
+            background-color: #fff;
+            color: #333;
+            padding: 15px 20px;
+            position: fixed;
+            top: 0; /* Fixed at the top */
+            width: 100%;
+            z-index: 1001;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+
+        nav .logo {
+            font-size: 24px;
+            font-weight: bold;
+            color: #1D2951;
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            justify-content: flex-start;
+        }
+
+        nav ul li {
+            margin-right: 20px;
+        }
+
+        nav ul li a {
+            color: #333;
+            text-decoration: none;
+            font-size: 16px;
+            transition: color 0.3s ease;
+        }
+
+        nav ul li a:hover {
+            color: #BE1515;
+        }
+
+        /* Content Area */
+        .content {
+            margin-top: 200px; /* Space for fixed banner and menu */
+            padding: 80px;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            width: 33%;
+            float: left;
+        }
+
+        h1 {
+            font-size: 64px;
+            margin-bottom: 20px;
+            color: #1D2951;
+        }
+
+        h2 {
+            font-size: 36px;
+            margin-top: 40px;
+            margin-bottom: 15px;
+            color: #333;
+        }
+
+        p {
+            font-size: 18px;
+            margin-bottom: 20px;
+            color: #555;
+        }
+
+        /* Canvas Styling */
+        #canvas-container {
+            position: absolute;
+            top: 90px; /* Space below the promo bar */
+            right: 0;
+            width: 66%;
+            height: calc(100vh - 90px);
+            overflow: hidden;
+        }
+
+        canvas {
+            width: 100%;
+            height: 100%;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            /* Adjust banner text size */
+            .banner-message {
+                font-size: 14px;
+            }
+
+            /* Stack menu items vertically */
+            nav ul {
+                flex-direction: column;
+            }
+
+            nav ul li {
+                margin-right: 0;
+                margin-bottom: 10px;
+            }
+
+            /* Adjust content margin */
+            .content {
+                margin-top: 230px;
+                width: 100%;
+            }
+
+            #canvas-container {
+                top: 310px;
+                width: 100%;
+                height: calc(100vh - 310px);
+            }
+        }
+
+        @media (max-width: 480px) {
+            /* Further adjust banner text size */
+            .banner-message {
+                font-size: 12px;
+            }
+
+            /* Reduce padding */
+            #promo-banner {
+                padding: 10px 15px;
+            }
+
+            /* Adjust menu padding */
+            nav {
+                padding: 8px 15px;
+            }
+
+            /* Adjust content margin */
+            .content {
+                margin-top: 210px;
+            }
+
+            #canvas-container {
+                top: 320px;
+                height: calc(100vh - 320px);
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Navigation Menu -->
+    <nav>
+        <div class="logo">SFC Academy</div>
+        <ul>
+            <li><a href="#">Home</a></li>
+            <li><a href="#">About</a></li>
+            <li><a href="#">Services</a></li>
+            <li><a href="#">Contact</a></li>
+        </ul>
+    </nav>
+
+    <!-- Promotional Banner -->
+    <div id="promo-banner">
+        <div class="banner-content">
+            <div class="banner-message">
+                Your Freight Decarbonization Starts Here – Visit SFC Academy’s website for our Courses!
+                <a href="https://www.placeholder.com" target="_blank">Learn More</a>
+            </div>
+            <button id="dismiss-banner" aria-label="Dismiss Banner">&times;</button>
+        </div>
+    </div>
+
+    <!-- Content Area -->
+    <div class="content">
+        <h1>Welcome to the SFC Academy</h1>
+        <p>Learn more about our mission and how we are helping shape a sustainable future.</p>
+    </div>
+
+    <!-- Canvas Area for Moving Objects -->
+    <div id="canvas-container">
+        <canvas id="movingBallsCanvas"></canvas>
+    </div>
+
+    <!-- JavaScript for Banner Functionality and Moving Objects -->
+    <script>
+        // Function to check if the banner has been dismissed in this session
+        function isBannerDismissed() {
+            return sessionStorage.getItem('bannerDismissed') === 'true';
+        }
+
+        // Function to dismiss the banner
+        function dismissBanner() {
+            const banner = document.getElementById('promo-banner');
+            banner.style.display = 'none';
+            sessionStorage.setItem('bannerDismissed', 'true');
+        }
+
+        // Initialize banner state on page load
+        document.addEventListener('DOMContentLoaded', function() {
+            if (isBannerDismissed()) {
+                document.getElementById('promo-banner').style.display = 'none';
+            }
+
+            // Add event listener to dismiss button
+            const dismissButton = document.getElementById('dismiss-banner');
+            if (dismissButton) {
+                dismissButton.addEventListener('click', dismissBanner);
+            }
+
+            // Moving balls animation
+            const canvas = document.getElementById('movingBallsCanvas');
+            const ctx = canvas.getContext('2d');
+            const balls = [];
+            const numBalls = 2000;
+            const ballColors = ['#000000', '#BE1515'];
+
+            // Resize canvas to fill container
+            function resizeCanvas() {
+                canvas.width = canvas.parentElement.offsetWidth;
+                canvas.height = canvas.parentElement.offsetHeight;
+            }
+            resizeCanvas();
+            window.addEventListener('resize', resizeCanvas);
+
+            // Create balls
+            for (let i = 0; i < numBalls; i++) {
+                balls.push({
+                    x: canvas.width / 2 + (Math.random() - 0.5) * canvas.width * 0.8,
+                    y: canvas.height / 2 + (Math.random() - 0.5) * canvas.height * 0.6,
+                    radius: 2 + Math.random() * 3,
+                    color: ballColors[Math.floor(Math.random() * ballColors.length)],
+                    dx: (Math.random() - 0.5) * 0.5,  // Slower movement speed
+                    dy: (Math.random() - 0.5) * 0.5   // Slower movement speed
+                });
+            }
+
+            function drawBalls() {
+                ctx.clearRect(0, 0, canvas.width, canvas.height);
+                balls.forEach(ball => {
+                    ctx.beginPath();
+                    ctx.arc(ball.x, ball.y, ball.radius, 0, Math.PI * 2);
+                    ctx.fillStyle = ball.color;
+                    ctx.fill();
+                    ctx.closePath();
+                });
+            }
+
+            function updateBalls() {
+                balls.forEach(ball => {
+                    // Move in an oval pattern
+                    const ovalCenterX = canvas.width / 2;
+                    const ovalCenterY = canvas.height / 2;
+                    const ovalWidth = canvas.width * 0.8;
+                    const ovalHeight = canvas.height * 0.6;
+                    const isInsideOval = ((ball.x - ovalCenterX) ** 2) / (ovalWidth / 2) ** 2 + ((ball.y - ovalCenterY) ** 2) / (ovalHeight / 2) ** 2 <= 1;
+                    
+                    if (isInsideOval) {
+                        ball.x += ball.dx;
+                        ball.y += ball.dy;
+                    } else {
+                        // Keep ball inside the oval
+                        ball.dx = -ball.dx;
+                        ball.dy = -ball.dy;
+                        ball.x += ball.dx;
+                        ball.y += ball.dy;
+                    }
+
+                    // Bounce off oval boundaries
+                    if (ball.x + ball.radius > canvas.width || ball.x - ball.radius < 0) {
+                        ball.dx *= -1;
+                    }
+                    if (ball.y + ball.radius > canvas.height || ball.y - ball.radius < 0) {
+                        ball.dy *= -1;
+                    }
+                });
+            }
+
+            function loop() {
+                drawBalls();
+                updateBalls();
+                requestAnimationFrame(loop);
+            }
+
+            loop();
+        });
+    </script>
+</body>
+</html>
